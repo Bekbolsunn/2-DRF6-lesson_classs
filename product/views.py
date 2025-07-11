@@ -72,6 +72,10 @@ class ProductListCreateAPIView(ListCreateAPIView):
     permission_classes = [IsOwner | IsAnonymous]
 
     def post(self, request, *args, **kwargs):
+        email = request.auth.get('email')
+        print(email, "2"*10)
+
+
         serializer = ProductValidateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
