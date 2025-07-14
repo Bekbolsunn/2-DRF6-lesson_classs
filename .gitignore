@@ -5,7 +5,12 @@ __pycache__/
 
 # C extensions
 *.so
-migrations/
+
+# migrations
+# Игнорировать все файлы в папке migrations
+**/migrations/*
+# Но не игнорировать __init__.py
+!**/migrations/__init__.py
 
 # Distribution / packaging
 .Python
