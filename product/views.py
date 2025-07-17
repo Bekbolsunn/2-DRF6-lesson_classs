@@ -6,6 +6,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
+from django.core.cache import cache
 
 from .models import Category, Product, Review
 from .serializers import (
@@ -70,6 +71,17 @@ class ProductListCreateAPIView(ListCreateAPIView):
     serializer_class = ProductSerializer
     pagination_class = CustomPagination
     permission_classes = [IsOwner | IsAnonymous]
+
+    def get(self, request, *args, **kwargs):
+        cached_data = cache.get('product_list')
+        if cached_data:
+            print("работает redis")
+            return Response(data=cached_data, status=status.HTTP_200_OK)
+        response = super().get(request, *args, **kwargs)
+        print("обычный response")
+        if response.data.get("total", 0) > 0:
+            cache.set("product_list", response.data, timeout=120)
+        return response
 
     def post(self, request, *args, **kwargs):
         email = request.auth.get('email')
