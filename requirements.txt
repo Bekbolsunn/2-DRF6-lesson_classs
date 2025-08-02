@@ -16,10 +16,13 @@ django-redis==6.0.0
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
 drf-yasg==1.21.10
+flower==2.0.1
+humanize==4.12.3
 idna==3.10
 inflection==0.5.1
 kombu==5.5.4
 packaging==25.0
+prometheus_client==0.22.1
 prompt_toolkit==3.0.51
 psycopg2-binary==2.9.10
 PyJWT==2.9.0
@@ -30,6 +33,7 @@ redis==6.2.0
 requests==2.32.4
 six==1.17.0
 sqlparse==0.5.3
+tornado==6.5.1
 tzdata==2025.2
 uritemplate==4.1.1
 urllib3==2.5.0
